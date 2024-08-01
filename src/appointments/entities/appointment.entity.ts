@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { IsDateString, IsString, Matches } from 'class-validator';
+import { Attendant } from 'src/attendants/entities/attendant.entity';
 
 @Entity('appointments')
 export class Appointment {
@@ -18,7 +19,15 @@ export class Appointment {
   @Matches(/^([01]\d|2[0-3]):([0-5]\d)$/, { message: 'Time must be in HH:MM format' })
   appointmentHour: string;
 
-  @Column({ type: 'varchar' })
+  @ManyToOne(() => Attendant, { nullable: false })
+  attendant: Attendant;
+
+  @Column({ type: 'varchar', insert: false, update: false })
   @IsString()
   attendantName: string;
+
+  
+  getAttendantName(): string {
+    return this.attendant ? this.attendant.attendantName : '';
+  }
 }
