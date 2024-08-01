@@ -12,8 +12,8 @@ export class AttendantsService {
     return `This action returns all attendants`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} attendant`;
+  findByName(attendantName: string) {
+    return `This action returns a #${attendantName} attendant`;
   }
 
   update(id: number, updateAttendantDto: UpdateAttendantDto) {

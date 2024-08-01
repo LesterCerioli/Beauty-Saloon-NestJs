@@ -7,6 +7,7 @@ import { AttendantsModule } from './attendants/attendants.module';
 import { SaloonsModule } from './saloons/saloons.module';
 import { CoreModule } from './core/core.module';
 
+
 @Module({
   imports: [CustomersModule, AppointmentsModule, AttendantsModule, SaloonsModule, CoreModule],
   controllers: [AppController],
