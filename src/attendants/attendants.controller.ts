@@ -17,18 +17,9 @@ export class AttendantsController {
     return this.attendantsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.attendantsService.findOne(+id);
+  @Get(':attendantName')
+  findByName(@Param('attendantName') attendantName: string) {
+    return this.attendantsService.findByName(attendantName);
   }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAttendantDto: UpdateAttendantDto) {
-    return this.attendantsService.update(+id, updateAttendantDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.attendantsService.remove(+id);
-  }
+  
 }
