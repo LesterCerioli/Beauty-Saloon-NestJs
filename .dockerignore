@@ -1,0 +1,30 @@
+# Node modules
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build output
+dist
+
+# TypeScript configuration files
+*.ts
+*.map
+
+# Docker and local development files
+Dockerfile
+.dockerignore
+
+# IDE/editor files
+.vscode
+.idea
+
+# OS generated files
+.DS_Store
+*.swp
+*.swo
+
+# Environment files
+.env
+
+# Logs
+*.log
