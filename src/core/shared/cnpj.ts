@@ -1,4 +1,5 @@
 // src/validators/cnpj.ts
+
 export class Cnpj {
     private readonly cnpj: string;
   
@@ -43,4 +44,3 @@ export class Cnpj {
       return this.cnpj;
     }
   }
-  

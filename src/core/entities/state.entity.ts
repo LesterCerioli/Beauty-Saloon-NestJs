@@ -1,10 +1,14 @@
-import { Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { City } from './city.entity';
 
-@Entity('customers')
-export class Syaye {
-    @PrimaryGeneratedColumn()
-    id: number;
+@Entity('states')
+export class State {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    state_name: string;
+  @Column({ type: 'varchar', nullable: false })
+  name: string;
 
+  @OneToMany(() => City, city => city.state)
+  cities: City[];
 }
