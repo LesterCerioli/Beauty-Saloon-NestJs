@@ -1,10 +1,14 @@
-import { Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { State } from './state.entity';
 
-@Entity('customers')
+@Entity('cities')
 export class City {
   @PrimaryGeneratedColumn()
   id: number;
 
-  city_name: string;
+  @Column({ type: 'varchar', nullable: false })
+  name: string;
 
+  @ManyToOne(() => State, state => state.cities)
+  state: State;
 }
