@@ -4,7 +4,7 @@ import { AppointmentsService } from './appointments.service';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 
-@Controller('appointments')
+@Controller('/api/appointments')
 export class AppointmentsController {
   constructor(private readonly appointmentsService: AppointmentsService) {}
 
@@ -29,7 +29,7 @@ export class AppointmentsController {
   }
 
   @Get('customer/:customerName')
-  async findByCustomerName(@Param('customerName') customerName: string, @Res() res: Response): Promise<Response> {
+  async findByCustomerName(@Param('/customerName') customerName: string, @Res() res: Response): Promise<Response> {
     try {
       const appointments = await this.appointmentsService.findByCustomerName(customerName);
       return res.status(HttpStatus.OK).json(appointments);
