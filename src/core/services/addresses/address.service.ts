@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Address } from 'src/core/entities/address.entity';
 import { Repository } from 'typeorm';
-import { CreateAddressDto } from 'src/core/dto/create-address.dto'; // Adjust path if needed
+import { CreateAddressDto } from 'src/core/dto/create-address.dto'; // Ajuste o caminho conforme necessário
 
 @Injectable()
 export class AddressService {
@@ -25,10 +25,14 @@ export class AddressService {
   }
 
   async getByState(stateId: number): Promise<Address[]> {
-    return this.addressRepository.find({ where: { stateId } });
+    return this.addressRepository.find({
+      where: { stateId } as any,
+    });
   }
 
   async getByCity(cityId: number): Promise<Address[]> {
-    return this.addressRepository.find({ where: { cityId } });
+    return this.addressRepository.find({
+      where: { cityId } as any,
+    });
   }
 }

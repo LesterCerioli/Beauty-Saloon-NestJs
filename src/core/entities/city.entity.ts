@@ -10,6 +10,4 @@ export class City {
   @Column()
   name: string;
 
-  @OneToMany(() => Address, (address) => address.city)
-  addresses: Address[];
 }

@@ -10,6 +10,5 @@ export class State {
   @Column()
   name: string;
 
-  @OneToMany(() => Address, (address) => address.state)
-  addresses: Address[];
+  
 }

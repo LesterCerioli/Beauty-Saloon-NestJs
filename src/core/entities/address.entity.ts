@@ -1,8 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { State } from './state.entity';
-import { City } from './city.entity';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('address')
 export class Address {
   @PrimaryGeneratedColumn()
   id: number;
@@ -13,9 +11,5 @@ export class Address {
   @Column()
   district: string;
 
-  @ManyToOne(() => City, (city) => city.addresses, { eager: true })
-  city: City;
-
-  @ManyToOne(() => State, (state) => state.addresses, { eager: true })
-  state: State;
+    
 }
