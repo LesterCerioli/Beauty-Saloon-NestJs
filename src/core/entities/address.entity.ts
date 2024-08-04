@@ -1,36 +1,21 @@
-import { IsString } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { City } from './city.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { State } from './state.entity';
-import { UF } from '../shared/uf';
+import { City } from './city.entity';
 
-@Entity('addresses')
+@Entity()
 export class Address {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', nullable: false })
-  @IsString()
-  avenue_street: string;
+  @Column()
+  street: string;
 
-  @Column({ type: 'varchar', nullable: false })
-  @IsString()
-  number: string;
-
-  @Column({ type: 'varchar', nullable: false })
-  @IsString()
-  complement: string;
-
-  @Column({ type: 'varchar', nullable: false })
-  @IsString()
+  @Column()
   district: string;
 
-  @ManyToOne(() => City, { nullable: false })
+  @ManyToOne(() => City, (city) => city.addresses, { eager: true })
   city: City;
 
-  @ManyToOne(() => State, { nullable: false })
+  @ManyToOne(() => State, (state) => state.addresses, { eager: true })
   state: State;
-
-  @ManyToOne(() => UF, { nullable: false })
-  uf: UF;
 }
