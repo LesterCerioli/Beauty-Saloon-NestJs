@@ -7,10 +7,16 @@ import { AppointmentsModule } from './appointments/appointments.module';
 import { AttendantsModule } from './attendants/attendants.module';
 import { SaloonsModule } from './saloons/saloons.module';
 import { CoreModule } from './core/core.module';
+import { AddressModule } from './core/address.module';
 import { Attendant } from './attendants/entities/attendant.entity';
+import { Customer } from './customers/entities/customer.entity';
+import { Appointment } from './appointments/entities/appointment.entity';
+import { Address } from './core/entities/address.entity';
+import { City } from './core/entities/city.entity';
+import { State } from './core/entities/state.entity';
 import * as fs from 'fs-extra';
 
-// Carregue o arquivo de configuração JSON
+// Load the JSON configuration file
 const config = fs.readJsonSync('./config.json');
 
 @Module({
@@ -22,10 +28,10 @@ const config = fs.readJsonSync('./config.json');
       username: config.DB_USERNAME,
       password: config.DB_PASSWORD,
       database: config.DB_DATABASE,
-      entities: [Attendant],
-      synchronize: true,
+      entities: [Attendant, Customer, Appointment, Address, City, State],
+      synchronize: true, // Consider setting to false and use migrations for production
       options: {
-        encrypt: true,
+        encrypt: true // Set to true for Azure SQL
       },
     }),
     CustomersModule,
@@ -33,8 +39,15 @@ const config = fs.readJsonSync('./config.json');
     AttendantsModule,
     SaloonsModule,
     CoreModule,
+    AddressModule, // Ensure AddressModule is included
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [
+    AppController,
+    // other controllers...
+  ],
+  providers: [
+    AppService,
+    // other services...
+  ],
 })
 export class AppModule {}

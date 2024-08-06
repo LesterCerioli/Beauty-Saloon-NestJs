@@ -1,14 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { City } from './city.entity';
+// state.entity.ts
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Address } from './address.entity';
 
-@Entity('states')
+@Entity()
 export class State {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column()
   name: string;
 
-  @OneToMany(() => City, city => city.state)
-  cities: City[];
+  
 }
