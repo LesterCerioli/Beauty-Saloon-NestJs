@@ -1,8 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Address } from 'src/core/entities/address.entity';
 import { Repository } from 'typeorm';
-import { CreateAddressDto } from 'src/core/dto/create-address.dto';
+import { CreateAddressDto } from 'src/core/dto/create-address.dto'; // Ajuste o caminho conforme necessário
 
 @Injectable()
 export class AddressService {
@@ -12,42 +12,27 @@ export class AddressService {
   ) {}
 
   async create(createAddressDto: CreateAddressDto): Promise<Address> {
-    // Cria uma nova entidade Address a partir do DTO
     const address = this.addressRepository.create(createAddressDto);
-    
-    // Salva a entidade no banco de dados
     return this.addressRepository.save(address);
   }
 
-  async getByAvenueOrStreet(avenueStreet: string): Promise<Address[]> {
-    const addresses = await this.addressRepository.find({ where: { avenue_street: avenueStreet } });
-    if (addresses.length === 0) {
-      throw new NotFoundException(`No addresses found for avenue/street: ${avenueStreet}`);
-    }
-    return addresses;
+  async getByStreet(street: string): Promise<Address[]> {
+    return this.addressRepository.find({ where: { street } });
   }
 
   async getByDistrict(district: string): Promise<Address[]> {
-    const addresses = await this.addressRepository.find({ where: { district } });
-    if (addresses.length === 0) {
-      throw new NotFoundException(`No addresses found for district: ${district}`);
-    }
-    return addresses;
+    return this.addressRepository.find({ where: { district } });
   }
 
   async getByState(stateId: number): Promise<Address[]> {
-    const addresses = await this.addressRepository.find({ where: { state: { id: stateId } } });
-    if (addresses.length === 0) {
-      throw new NotFoundException(`No addresses found for state with ID: ${stateId}`);
-    }
-    return addresses;
+    return this.addressRepository.find({
+      where: { stateId } as any,
+    });
   }
 
   async getByCity(cityId: number): Promise<Address[]> {
-    const addresses = await this.addressRepository.find({ where: { city: { id: cityId } } });
-    if (addresses.length === 0) {
-      throw new NotFoundException(`No addresses found for city with ID: ${cityId}`);
-    }
-    return addresses;
+    return this.addressRepository.find({
+      where: { cityId } as any,
+    });
   }
 }

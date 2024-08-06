@@ -19,13 +19,13 @@ export class AddressController {
     }
   }
 
-  @Get('by-avenue-or-street')
+  @Get('by-street')
   @HttpCode(HttpStatus.OK)
-  async getByAvenueOrStreet(@Query('avenueStreet') avenueStreet: string): Promise<Address[]> {
+  async getByStreet(@Query('street') street: string): Promise<Address[]> {
     try {
-      const addresses = await this.addressService.getByAvenueOrStreet(avenueStreet);
+      const addresses = await this.addressService.getByStreet(street);
       if (addresses.length === 0) {
-        throw new NotFoundException(`No addresses found for avenue/street: ${avenueStreet}`);
+        throw new NotFoundException(`No addresses found for street: ${street}`);
       }
       return addresses;
     } catch (error) {

@@ -1,14 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { State } from './state.entity';
+// city.entity.ts
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Address } from './address.entity';
 
-@Entity('cities')
+@Entity()
 export class City {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column()
   name: string;
 
-  @ManyToOne(() => State, state => state.cities)
-  state: State;
 }

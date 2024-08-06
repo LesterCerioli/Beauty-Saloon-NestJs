@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const options = new DocumentBuilder()
-    .setTitle('API')
+    .setTitle('Beauty Saloon API')
     .setDescription('The API description')
     .setVersion('1.0')
     .addTag('customers')
@@ -14,6 +14,8 @@ async function bootstrap() {
     .addTag('saloons')
     .addTag('addresses')
     .addTag('attendants')
+    .addTag('cities')
+    .addTag('states')
     .build();
 
   const document = SwaggerModule.createDocument(app, options);

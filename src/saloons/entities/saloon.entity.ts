@@ -1,15 +1,13 @@
-import { IsString } from "class-validator";
-import { Column, Entity } from "typeorm";
-
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('saloons')
 export class Saloon {
-  @Column({ type: 'varchar', nullable: false })
-  private _cnpj: string;
+  @PrimaryGeneratedColumn()
+  id: number; // Define a coluna primária como gerada automaticamente
 
   @Column({ type: 'varchar', nullable: false })
-  @IsString()
+  cnpj: string;
+
+  @Column({ type: 'varchar', nullable: false })
   saloonName: string;
-
-  
 }

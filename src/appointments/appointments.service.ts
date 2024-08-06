@@ -16,10 +16,14 @@ export class AppointmentsService {
     private readonly attendantRepository: Repository<Attendant>,
   ) {}
 
-  async create(createAppointmentDto: CreateAppointmentDto): Promise<Appointment> {
+  async create(
+    createAppointmentDto: CreateAppointmentDto,
+  ): Promise<Appointment> {
     const attendant = await this.attendantRepository.findOne({ where: { id: createAppointmentDto.attendantId } });
     if (!attendant) {
-      throw new NotFoundException(`Attendant with ID ${createAppointmentDto.attendantId} not found`);
+      throw new NotFoundException(
+        `Attendant with ID ${createAppointmentDto.attendantId} not found`,
+      );
     }
 
     const appointment = this.appointmentRepository.create({
@@ -56,7 +60,10 @@ export class AppointmentsService {
     });
   }
 
-  async update(id: number, updateAppointmentDto: UpdateAppointmentDto): Promise<Appointment> {
+  async update(
+    id: number,
+    updateAppointmentDto: UpdateAppointmentDto,
+  ): Promise<Appointment> {
     const appointment = await this.appointmentRepository.findOne({ where: { id }, relations: ['attendant'] });
     if (!appointment) {
       throw new NotFoundException(`Appointment with ID ${id} not found`);
@@ -65,7 +72,9 @@ export class AppointmentsService {
     if (updateAppointmentDto.attendantId) {
       const attendant = await this.attendantRepository.findOne({ where: { id: updateAppointmentDto.attendantId } });
       if (!attendant) {
-        throw new NotFoundException(`Attendant with ID ${updateAppointmentDto.attendantId} not found`);
+        throw new NotFoundException(
+          `Attendant with ID ${updateAppointmentDto.attendantId} not found`,
+        );
       }
       appointment.attendant = attendant;
       appointment.attendantName = attendant.attendantName;
